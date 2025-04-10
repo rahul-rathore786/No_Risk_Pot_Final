@@ -137,7 +137,7 @@ function Home({ lotteryData, setPage, isOwner }) {
           <div className="step">
             <div className="step-number">4</div>
             <h3>Win Prizes</h3>
-            <p>Winners share the interest: 50% for 1st, 30% for 2nd place.</p>
+            <p>Winners will get the interest Share: 50% for 1st, 30% for 2nd place.</p>
           </div>
         </div>
       </div>
