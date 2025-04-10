@@ -1,4 +1,7 @@
 # No Risk Pot
+## 🔗 Live Website
+
+Visit the live version here: [https://no-risk-pot-final.vercel.app/](https://no-risk-pot-final.vercel.app/)
 
 ## Project Overview
 
@@ -16,6 +19,27 @@ No Risk Pot is a revolutionary DeFi lottery platform where users can participate
 - Platform Fee: 20% of the total interest earned goes to the platform owner
 
 This creates a no-loss lottery system where participants can enjoy the excitement of potentially winning while preserving their capital.
+
+## 🖼️ Project Screenshots
+
+### 🏠 Home Page
+![Home Page - View 1](./frontend/public/home1.png)
+![Home Page - View 2](./frontend/public/home2.png)
+![Home Page - View 3](./frontend/public/home3.png)
+
+### 🎟️ Buy Ticket Page
+![Buy Ticket - Step 1](./frontend/public/buy_tkt.png)
+![Buy Ticket - Step 2](./frontend/public/buy_tkt2.png)
+
+### 🛠️ Admin Dashboard
+![Admin Page - Lottery Overview](./frontend/public/adminpage1.png)
+![Admin Page - Manage Tickets](./frontend/public/adminpage2.png)
+![Admin Page - Winners List](./frontend/public/adminpage3.png)
+![Admin Page - Withdraw Funds](./frontend/public/adminpage4.png)
+
+### 💰 Claim Fund Page
+![Claim Fund Page](./frontend/public/claim_fund_page.png)
+
 
 ## Project Structure
 
