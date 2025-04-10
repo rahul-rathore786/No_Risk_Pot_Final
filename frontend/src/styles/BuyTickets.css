@@ -1,0 +1,153 @@
+.buy-tickets-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.buy-tickets-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1e293b;
+}
+
+.info-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+  text-align: center;
+}
+
+.info-item h3 {
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 1rem;
+}
+
+.info-item p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.draw-completed-message,
+.max-tickets-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.ticket-purchase-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.cost-summary {
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.cost-summary p {
+  font-size: 1.1rem;
+  color: #64748b;
+}
+
+.cost-summary span {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.approve-button,
+.buy-button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.approve-button {
+  background-color: #0284c7;
+  color: white;
+}
+
+.approve-button:hover:not(:disabled) {
+  background-color: #0369a1;
+  transform: translateY(-2px);
+}
+
+.buy-button {
+  background-color: #f59e0b;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.buy-button:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.insufficient-balance {
+  margin-top: 1rem;
+  text-align: center;
+  color: #b91c1c;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .info-panel {
+    grid-template-columns: 1fr;
+  }
+}

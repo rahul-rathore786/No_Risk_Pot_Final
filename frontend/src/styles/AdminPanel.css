@@ -1,0 +1,161 @@
+.admin-panel-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.admin-panel-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1e293b;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-stat-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.admin-stat-card h3 {
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 1rem;
+}
+
+.admin-stat-card p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.admin-stat-card p.pending {
+  color: #15803d;
+}
+
+.admin-stat-card p.completed {
+  color: #b91c1c;
+}
+
+.admin-message {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.admin-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-panel-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.admin-panel-section h2 {
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+  font-size: 1.3rem;
+}
+
+.admin-panel-section p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.admin-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.admin-button {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.admin-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.interest-10 {
+  background-color: #0284c7;
+  color: white;
+}
+
+.interest-10:hover:not(:disabled) {
+  background-color: #0369a1;
+}
+
+.interest-2-5 {
+  background-color: #0d9488;
+  color: white;
+}
+
+.interest-2-5:hover:not(:disabled) {
+  background-color: #0f766e;
+}
+
+.draw {
+  background-color: #f59e0b;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.draw:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.claim-fee {
+  background-color: #7c3aed;
+  color: white;
+}
+
+.claim-fee:hover:not(:disabled) {
+  background-color: #6d28d9;
+}
+
+.admin-info-message {
+  background-color: #eff6ff;
+  color: #1e40af;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #bfdbfe;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .admin-panels {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

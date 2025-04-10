@@ -1,0 +1,142 @@
+.claim-funds-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.claim-funds-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1e293b;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-size: 2.5rem;
+}
+
+.draw-pending-message,
+.no-tickets-message,
+.already-claimed-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.claim-details {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.claim-summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.claim-item {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.claim-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.claim-item h3 {
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+
+.claim-item p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  width: 100%;
+  text-align: center;
+}
+
+.claim-item.prize {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+}
+
+.claim-item.prize p {
+  color: #d97706;
+}
+
+.claim-item.total {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.claim-item.total p {
+  color: #15803d;
+}
+
+.claim-message {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.claim-button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background-color: #15803d;
+  color: white;
+  animation: pulse 2s infinite;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.claim-button:hover:not(:disabled) {
+  background-color: #166534;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .claim-summary {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .claim-item {
+    flex: 0 0 150px;
+  }
+}
