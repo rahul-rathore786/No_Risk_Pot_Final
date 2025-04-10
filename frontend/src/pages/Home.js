@@ -7,8 +7,7 @@ function Home({ lotteryData, setPage, isOwner }) {
       <div className="hero-section">
         <h1 className="hero-title">The First Zero-Loss Lottery</h1>
         <p className="hero-subtitle">
-          Purchase tickets and get your money back, guaranteed. Win from the
-          interest pool!
+          Buy a lottery ticket with zero risk – if you don’t win, you get your money back, because your money is safely used to earn interest, and winners are paid from that!
         </p>
         {!lotteryData.drawCompleted ? (
           <button className="cta-button" onClick={() => setPage("buy")}>
