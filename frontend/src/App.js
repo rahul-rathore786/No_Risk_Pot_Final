@@ -12,7 +12,10 @@ import ClaimFunds from "./pages/ClaimFunds";
 
 // Contract ABIs
 import ZeroLossLotteryABI from "./artifacts/contracts/ZeroLossLottery.sol/ZeroLossLottery.json";
-import PYUSDABI from "./artifacts/contracts/MockPYUSD.sol/MockPYUSD.json";
+import ERC20ABI from "./contracts/ERC20ABI.json";
+
+// PYUSD token has 6 decimals
+const PYUSD_DECIMALS = 6;
 
 function App() {
   // State variables
@@ -55,12 +58,8 @@ function App() {
         setSigner(web3Signer);
         setAccount(address);
 
-        // Replace with your deployed contract addresses
-        // const lotteryAddr = "YOUR_DEPLOYED_LOTTERY_CONTRACT_ADDRESS";
-        // const pyusdAddr = "YOUR_DEPLOYED_PYUSD_CONTRACT_ADDRESS";
-
         const lotteryAddr = contractAddresses.ZeroLossLottery;
-        const pyusdAddr = contractAddresses.MockPYUSD;
+        const pyusdAddr = contractAddresses.PYUSD;
         setLotteryAddress(lotteryAddr);
         setPyusdAddress(pyusdAddr);
 
@@ -71,7 +70,7 @@ function App() {
         );
         setLotteryContract(lottery);
 
-        const pyusd = new ethers.Contract(pyusdAddr, PYUSDABI.abi, web3Signer);
+        const pyusd = new ethers.Contract(pyusdAddr, ERC20ABI, web3Signer);
         setPyusdContract(pyusd);
 
         // Check if user is owner
@@ -89,6 +88,16 @@ function App() {
     }
   };
 
+  // Helper function to format PYUSD amounts (6 decimals)
+  const formatPyusd = (amount) => {
+    return ethers.utils.formatUnits(amount, PYUSD_DECIMALS);
+  };
+
+  // Helper function to parse PYUSD amounts (6 decimals)
+  const parsePyusd = (amount) => {
+    return ethers.utils.parseUnits(amount.toString(), PYUSD_DECIMALS);
+  };
+
   // Refresh lottery data
   const refreshLotteryData = async (lottery, pyusd, address) => {
     if (!lottery || !pyusd) return;
@@ -104,10 +113,10 @@ function App() {
 
       setLotteryData({
         totalTickets: totalTickets.toNumber(),
-        interestPool: ethers.utils.formatEther(interestPool),
+        interestPool: formatPyusd(interestPool),
         drawCompleted,
         userTickets: userTickets.toNumber(),
-        pyusdBalance: ethers.utils.formatEther(pyusdBalance),
+        pyusdBalance: formatPyusd(pyusdBalance),
         isWinner: isWinner,
         hasClaimed,
       });
@@ -160,6 +169,7 @@ function App() {
             refreshData={() =>
               refreshLotteryData(lotteryContract, pyusdContract, account)
             }
+            parsePyusd={parsePyusd}
           />
         );
       case "admin":
@@ -171,6 +181,7 @@ function App() {
             refreshData={() =>
               refreshLotteryData(lotteryContract, pyusdContract, account)
             }
+            parsePyusd={parsePyusd}
           />
         ) : (
           <div className="error-message">

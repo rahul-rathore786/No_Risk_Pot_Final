@@ -5,11 +5,10 @@ function Home({ lotteryData, setPage, isOwner }) {
   return (
     <div className="home-container">
       <div className="hero-section">
-        <h1 className="hero-title">Win Big or Get Refunded – No More Losing!</h1>
+        <h1 className="hero-title">The First Zero-Loss Lottery</h1>
         <p className="hero-subtitle">
-          Buy a lottery ticket with zero risk – if you don’t win, you get your
-          money back, because your money is safely used to earn interest, and
-          winners are paid from that
+          Purchase tickets and get your money back, guaranteed. Win from the
+          interest pool!
         </p>
         {!lotteryData.drawCompleted ? (
           <button className="cta-button" onClick={() => setPage("buy")}>
@@ -19,6 +18,17 @@ function Home({ lotteryData, setPage, isOwner }) {
           <button className="cta-button" onClick={() => setPage("claim")}>
             Claim Your Funds
           </button>
+        )}
+
+        {parseFloat(lotteryData.pyusdBalance) === 0 && (
+          <div className="pyusd-info">
+            <p>
+              Need PYUSD tokens to play?{" "}
+              <button onClick={() => setPage("buy")} className="pyusd-link">
+                Get PYUSD here
+              </button>
+            </p>
+          </div>
         )}
       </div>
 
@@ -32,14 +42,6 @@ function Home({ lotteryData, setPage, isOwner }) {
           >
             {lotteryData.drawCompleted ? "Draw Completed" : "Draw Pending"}
           </div>
-          {/* <div className="draw-date">
-            <div className="date-label">
-              {lotteryData.drawCompleted ? "Draw Date" : "Next Draw"}
-            </div>
-            <div className="date-text">
-              {lotteryData.drawCompleted ? "Completed" : "1st date of month"}
-            </div>
-          </div> */}
         </div>
 
         <div className="stat-card">
@@ -66,6 +68,13 @@ function Home({ lotteryData, setPage, isOwner }) {
           <div className="dashboard-card">
             <h3>Your Tickets</h3>
             <div className="dashboard-value">{lotteryData.userTickets}/10</div>
+          </div>
+
+          <div className="dashboard-card">
+            <h3>Your PYUSD Balance</h3>
+            <div className="dashboard-value">
+              {parseFloat(lotteryData.pyusdBalance).toFixed(2)} PYUSD
+            </div>
           </div>
 
           {lotteryData.isWinner > 0 && (

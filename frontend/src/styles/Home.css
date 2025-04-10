@@ -45,6 +45,33 @@
   background-color: #d97706;
 }
 
+.pyusd-info {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pyusd-info p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.pyusd-link {
+  background: none;
+  border: none;
+  color: #f59e0b;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.pyusd-link:hover {
+  color: #d97706;
+}
+
 .lottery-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -98,28 +125,6 @@
 .status-badge.completed {
   background-color: #fee2e2;
   color: #b91c1c;
-}
-
-/* Date display styles */
-.draw-date {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.date-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  background-color: #f8fafc;
-  border-radius: 6px;
-  padding: 0.5rem;
-  margin-bottom: 0.3rem;
-  display: inline-block;
-}
-
-.date-label {
-  font-size: 0.8rem;
-  color: #64748b;
 }
 
 .user-dashboard {

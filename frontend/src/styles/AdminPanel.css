@@ -8,154 +8,209 @@
   text-align: center;
   margin-bottom: 2rem;
   color: #1e293b;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
-.admin-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+.admin-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
 }
 
-.admin-stat-card {
-  background-color: white;
+.admin-section h2 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.status-summary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.status-item {
+  background-color: #f8fafc;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  min-width: 180px;
+  border: 1px solid #e2e8f0;
 }
 
-.admin-stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.admin-stat-card h3 {
+.status-item h3 {
   margin-bottom: 0.5rem;
   color: #475569;
   font-size: 1rem;
+  font-weight: 600;
 }
 
-.admin-stat-card p {
+.status-item p {
   font-size: 1.5rem;
   font-weight: 700;
   color: #1e293b;
 }
 
-.admin-stat-card p.pending {
-  color: #15803d;
+.status-item p.completed {
+  color: #b91c1c;
 }
 
-.admin-stat-card p.completed {
-  color: #b91c1c;
+.status-item p.pending {
+  color: #15803d;
 }
 
 .admin-message {
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 2rem;
   text-align: center;
+  font-weight: 500;
 }
 
-.admin-panels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
+.admin-message.info {
+  background-color: #eff6ff;
+  color: #1e40af;
 }
 
-.admin-panel-section {
-  background-color: white;
-  padding: 2rem;
+.admin-message.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+
+.admin-message.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.action-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.admin-panel-section h2 {
+.action-card h3 {
   margin-bottom: 0.5rem;
   color: #1e293b;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.admin-panel-section p {
+.action-card p {
   color: #64748b;
   margin-bottom: 1.5rem;
 }
 
-.admin-buttons {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #f59e0b;
+}
+
+.action-info {
+  background-color: #f1f5f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.action-info p {
+  margin: 0;
+  color: #475569;
+  font-weight: 500;
 }
 
 .admin-button {
+  display: block;
+  width: 100%;
   padding: 1rem;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
   font-weight: 600;
+  color: white;
+  cursor: pointer;
   transition: all 0.3s ease;
+  border: none;
 }
 
-.admin-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
-
-.interest-10 {
+.add-interest-button {
   background-color: #0284c7;
-  color: white;
 }
 
-.interest-10:hover:not(:disabled) {
+.add-interest-button:hover:not(:disabled) {
   background-color: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.interest-2-5 {
-  background-color: #0d9488;
-  color: white;
-}
-
-.interest-2-5:hover:not(:disabled) {
-  background-color: #0f766e;
-}
-
-.draw {
+.draw-winners-button {
   background-color: #f59e0b;
-  color: white;
-  animation: pulse 2s infinite;
 }
 
-.draw:hover:not(:disabled) {
+.draw-winners-button:hover:not(:disabled) {
   background-color: #d97706;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.claim-fee {
-  background-color: #7c3aed;
-  color: white;
+.claim-fee-button {
+  background-color: #15803d;
 }
 
-.claim-fee:hover:not(:disabled) {
-  background-color: #6d28d9;
+.claim-fee-button:hover:not(:disabled) {
+  background-color: #166534;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.admin-info-message {
-  background-color: #eff6ff;
-  color: #1e40af;
-  padding: 1rem;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid #bfdbfe;
+.admin-button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.warning-text {
+  color: #b91c1c;
+  font-size: 0.9rem;
   margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
 }
 
 @media (max-width: 768px) {
-  .admin-stats {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .admin-panel-container {
+    padding: 1.5rem;
   }
-  
-  .admin-panels {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+
+  .admin-section {
+    padding: 1.5rem;
+  }
+
+  .status-item {
+    flex: 1 1 100%;
   }
 }

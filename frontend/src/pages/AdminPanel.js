@@ -1,56 +1,58 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
 import "../styles/AdminPanel.css";
-import TokenTransfer from "../components/TokenTransfer";
-import "../styles/TokenTransfer.css";
+
 function AdminPanel({
   lotteryContract,
   pyusdContract,
   lotteryData,
   refreshData,
+  parsePyusd,
 }) {
+  const [interestPercentage, setInterestPercentage] = useState(10);
+  const [randomSeed, setRandomSeed] = useState(
+    Math.floor(Math.random() * 1000000)
+  );
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
 
-  // Add 10% interest
-  const addTenPercentInterest = async () => {
-    await addInterest(10);
+  const handleInterestChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0 && value <= 100) {
+      setInterestPercentage(value);
+    }
   };
 
-  // Add 2.5% interest
-  const addQuarterPercentInterest = async () => {
-    await addInterest(2.5);
+  const handleRandomSeedChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0) {
+      setRandomSeed(value);
+    }
   };
 
-  // Generic function to add interest
-  const addInterest = async (percentage) => {
+  const handleAddInterest = async () => {
     if (!lotteryContract || !pyusdContract) return;
 
     setLoading(true);
-    setMessage({ text: `Adding ${percentage}% interest...`, type: "info" });
+    setMessage({ text: "Adding interest...", type: "info" });
 
     try {
-      // Calculate interest amount
-      const interestAmount = (lotteryData.totalTickets * percentage) / 100;
+      const totalInterestAmount =
+        (lotteryData.totalTickets * interestPercentage) / 100;
+      const amountToApprove = parsePyusd(totalInterestAmount);
 
-      // First approve PYUSD transfer
-      const interestWei = ethers.utils.parseEther(interestAmount.toString());
+      // First approve PYUSD
       const approveTx = await pyusdContract.approve(
         lotteryContract.address,
-        interestWei
+        amountToApprove
       );
       await approveTx.wait();
 
       // Then add interest
-      // For 2.5%, we pass 2 or 3 since the contract only accepts integers
-      const percentageInt = percentage === 2.5 ? 2 : Math.round(percentage);
-      const addTx = await lotteryContract.addInterest(percentageInt);
-      await addTx.wait();
+      const tx = await lotteryContract.addInterest(interestPercentage);
+      await tx.wait();
 
-      setMessage({
-        text: `Successfully added ${percentage}% interest!`,
-        type: "success",
-      });
+      setMessage({ text: "Interest added successfully!", type: "success" });
       refreshData();
     } catch (error) {
       console.error("Error adding interest:", error);
@@ -63,18 +65,14 @@ function AdminPanel({
     }
   };
 
-  // Draw winners
-  const drawWinners = async () => {
+  const handleDrawWinners = async () => {
     if (!lotteryContract) return;
 
     setLoading(true);
     setMessage({ text: "Drawing winners...", type: "info" });
 
     try {
-      // Generate a random seed
-      const seed = Math.floor(Math.random() * 1000000);
-
-      const tx = await lotteryContract.drawWinners(seed);
+      const tx = await lotteryContract.drawWinners(randomSeed);
       await tx.wait();
 
       setMessage({ text: "Winners drawn successfully!", type: "success" });
@@ -90,8 +88,7 @@ function AdminPanel({
     }
   };
 
-  // Claim platform fee
-  const claimPlatformFee = async () => {
+  const handleClaimPlatformFee = async () => {
     if (!lotteryContract) return;
 
     setLoading(true);
@@ -121,20 +118,25 @@ function AdminPanel({
     <div className="admin-panel-container">
       <h1>Admin Panel</h1>
 
-      <div className="admin-stats">
-        <div className="admin-stat-card">
-          <h3>Total Pool Size</h3>
-          <p>{lotteryData.totalTickets} PYUSD</p>
-        </div>
-        <div className="admin-stat-card">
-          <h3>Interest Pool</h3>
-          <p>{parseFloat(lotteryData.interestPool).toFixed(2)} PYUSD</p>
-        </div>
-        <div className="admin-stat-card">
-          <h3>Draw Status</h3>
-          <p className={lotteryData.drawCompleted ? "completed" : "pending"}>
-            {lotteryData.drawCompleted ? "Completed" : "Pending"}
-          </p>
+      <div className="admin-section">
+        <h2>Lottery Status</h2>
+        <div className="status-summary">
+          <div className="status-item">
+            <h3>Total Tickets</h3>
+            <p>{lotteryData.totalTickets}</p>
+          </div>
+
+          <div className="status-item">
+            <h3>Interest Pool</h3>
+            <p>{parseFloat(lotteryData.interestPool).toFixed(2)} PYUSD</p>
+          </div>
+
+          <div className="status-item">
+            <h3>Draw Status</h3>
+            <p className={lotteryData.drawCompleted ? "completed" : "pending"}>
+              {lotteryData.drawCompleted ? "Completed" : "Pending"}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -142,81 +144,128 @@ function AdminPanel({
         <div className={`admin-message ${message.type}`}>{message.text}</div>
       )}
 
-      <div className="admin-panels">
-        <div className="admin-panel-section">
-          <h2>Interest Management</h2>
-          <p>Add interest to the lottery pool from your wallet</p>
+      <div className="admin-section">
+        <h2>Actions</h2>
 
-          <div className="admin-buttons">
-            <button
-              className="admin-button interest-10"
-              onClick={addTenPercentInterest}
-              disabled={
-                loading ||
-                lotteryData.totalTickets === 0 ||
-                lotteryData.drawCompleted
-              }
-            >
-              Add 10% Interest
-            </button>
-            <button
-              className="admin-button interest-2-5"
-              onClick={addQuarterPercentInterest}
-              disabled={
-                loading ||
-                lotteryData.totalTickets === 0 ||
-                lotteryData.drawCompleted
-              }
-            >
-              Add 2.5% Interest
-            </button>
-          </div>
-        </div>
+        {!lotteryData.drawCompleted ? (
+          <>
+            <div className="action-card">
+              <h3>Add Interest</h3>
+              <p>
+                Add interest to the lottery pool as a percentage of the total
+                ticket value.
+              </p>
 
-        <div className="admin-panel-section">
-          <h2>Draw Management</h2>
-          <p>Draw winners and manage lottery cycle</p>
+              <div className="input-group">
+                <label htmlFor="interest-percentage">
+                  Interest Percentage (%)
+                </label>
+                <input
+                  type="number"
+                  id="interest-percentage"
+                  value={interestPercentage}
+                  onChange={handleInterestChange}
+                  min="1"
+                  max="100"
+                  disabled={loading || lotteryData.totalTickets === 0}
+                />
+              </div>
 
-          <div className="admin-buttons">
-            <button
-              className="admin-button draw"
-              onClick={drawWinners}
-              disabled={
-                loading ||
-                lotteryData.totalTickets < 2 ||
-                lotteryData.interestPool <= 0 ||
-                lotteryData.drawCompleted
-              }
-            >
-              Draw Winners
-            </button>
-            {lotteryData.drawCompleted && (
+              <div className="action-info">
+                <p>
+                  Total Interest Amount:{" "}
+                  {(
+                    (lotteryData.totalTickets * interestPercentage) /
+                    100
+                  ).toFixed(2)}{" "}
+                  PYUSD
+                </p>
+              </div>
+
               <button
-                className="admin-button claim-fee"
-                onClick={claimPlatformFee}
-                disabled={loading}
+                className="admin-button add-interest-button"
+                onClick={handleAddInterest}
+                disabled={loading || lotteryData.totalTickets === 0}
               >
-                Claim Platform Fee
+                {loading ? "Processing..." : "Add Interest"}
               </button>
-            )}
+
+              {lotteryData.totalTickets === 0 && (
+                <p className="warning-text">
+                  Cannot add interest until tickets are sold.
+                </p>
+              )}
+            </div>
+
+            <div className="action-card">
+              <h3>Draw Winners</h3>
+              <p>Select lottery winners based on a random seed.</p>
+
+              <div className="input-group">
+                <label htmlFor="random-seed">Random Seed</label>
+                <input
+                  type="number"
+                  id="random-seed"
+                  value={randomSeed}
+                  onChange={handleRandomSeedChange}
+                  min="1"
+                  disabled={
+                    loading ||
+                    lotteryData.interestPool <= 0 ||
+                    lotteryData.totalTickets < 2
+                  }
+                />
+              </div>
+
+              <button
+                className="admin-button draw-winners-button"
+                onClick={handleDrawWinners}
+                disabled={
+                  loading ||
+                  lotteryData.interestPool <= 0 ||
+                  lotteryData.totalTickets < 2
+                }
+              >
+                {loading ? "Processing..." : "Draw Winners"}
+              </button>
+
+              {lotteryData.interestPool <= 0 && (
+                <p className="warning-text">
+                  Cannot draw winners until interest is added.
+                </p>
+              )}
+
+              {lotteryData.totalTickets < 2 && (
+                <p className="warning-text">
+                  Need at least 2 participants to draw winners.
+                </p>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="action-card">
+            <h3>Claim Platform Fee</h3>
+            <p>
+              Claim the platform fee (20% of interest) and reset the lottery for
+              the next round.
+            </p>
+
+            <div className="action-info">
+              <p>
+                Platform Fee:{" "}
+                {(parseFloat(lotteryData.interestPool) * 0.2).toFixed(2)} PYUSD
+              </p>
+            </div>
+
+            <button
+              className="admin-button claim-fee-button"
+              onClick={handleClaimPlatformFee}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Claim Fee & Reset Lottery"}
+            </button>
           </div>
-        </div>
-      </div>
-
-      {lotteryData.totalTickets < 2 && !lotteryData.drawCompleted && (
-        <div className="admin-info-message">
-          At least 2 participants are needed before drawing winners.
-        </div>
-      )}
-      {lotteryData.interestPool <= 0 && !lotteryData.drawCompleted && (
-        <div className="admin-info-message">
-          Add interest to the pool before drawing winners.
-        </div>
-      )}
-
-      <div className="admin-panel-section">
-        <h2>Token Management</h2>
-        <TokenTransfer pyusdContract={pyusdContract} />
+        )}
       </div>
     </div>
   );

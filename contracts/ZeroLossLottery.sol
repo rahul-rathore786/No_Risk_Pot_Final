@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract ZeroLossLottery is Ownable {
     // State variables
     IERC20 public pyusd;
-    uint256 public ticketPrice = 1 * 10**18; // 1 PYUSD (assuming 18 decimals)
+    uint256 public ticketPrice = 1 * 10**6; // 1 PYUSD (with 6 decimals)
     uint256 public maxTicketsPerUser = 10;
     mapping(address => uint256) public tickets;
     address[] public participants;
@@ -24,6 +24,7 @@ contract ZeroLossLottery is Ownable {
     event DrawCompleted(address firstWinner, address secondWinner);
     event FundsClaimed(address user, uint256 refundAmount, uint256 prizeAmount);
     
+    // Constructor now accepts the address of actual PYUSD on Sepolia
     constructor(address _pyusdAddress) {
         pyusd = IERC20(_pyusdAddress);
     }

@@ -2,30 +2,29 @@ const hre = require("hardhat");
 const fs = require("fs");
 const path = require("path");
 
+// Actual PYUSD token address on Sepolia testnet
+const PYUSD_ADDRESS = "0xCaC524BcA292aaade2DF8A05cC58F0a65B1B3bB9"; // Updated PYUSD address on Sepolia
+
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
 
   console.log("Deploying contracts with the account:", deployer.address);
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  // Deploy MockPYUSD first
-  const MockPYUSD = await hre.ethers.getContractFactory("MockPYUSD");
-  const mockPYUSD = await MockPYUSD.deploy();
-  await mockPYUSD.deployed();
-  console.log("MockPYUSD deployed to:", mockPYUSD.address);
+  // We don't need to deploy MockPYUSD anymore as we'll use the real PYUSD token
 
-  // Deploy ZeroLossLottery using the MockPYUSD address
+  // Deploy ZeroLossLottery using the real PYUSD address
   const ZeroLossLottery = await hre.ethers.getContractFactory(
     "ZeroLossLottery"
   );
-  const lottery = await ZeroLossLottery.deploy(mockPYUSD.address);
+  const lottery = await ZeroLossLottery.deploy(PYUSD_ADDRESS);
   await lottery.deployed();
   console.log("ZeroLossLottery deployed to:", lottery.address);
 
-  // Save the contract addresses to a file that the frontend can access 
+  // Save the contract addresses to a file that the frontend can access
   const contractAddresses = {
     ZeroLossLottery: lottery.address,
-    MockPYUSD: mockPYUSD.address,
+    PYUSD: PYUSD_ADDRESS, // Changed from MockPYUSD to PYUSD
   };
 
   // Create a config file for the frontend

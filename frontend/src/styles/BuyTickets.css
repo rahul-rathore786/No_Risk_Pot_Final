@@ -8,6 +8,8 @@
   text-align: center;
   margin-bottom: 2rem;
   color: #1e293b;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .info-panel {
@@ -54,69 +56,165 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
+.ticket-purchase-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #475569;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
-}
-
-.cost-summary {
+.summary-item {
   background-color: #f8fafc;
-  padding: 1rem;
-  border-radius: 6px;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 8px;
   text-align: center;
+  flex: 1;
+  min-width: 150px;
+  border: 1px solid #e2e8f0;
 }
 
-.cost-summary p {
-  font-size: 1.1rem;
-  color: #64748b;
+.summary-item h3 {
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.cost-summary span {
+.summary-item p {
+  font-size: 1.5rem;
   font-weight: 700;
   color: #1e293b;
 }
 
-.message {
+.ticket-selection {
+  margin-bottom: 2rem;
+}
+
+.ticket-selection h3 {
+  margin-bottom: 1rem;
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.ticket-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.ticket-adjust-btn {
+  background-color: #f59e0b;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.ticket-adjust-btn:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.ticket-adjust-btn:disabled {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.ticket-input {
+  width: 80px;
+  height: 40px;
+  margin: 0 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+}
+
+.ticket-input:focus {
+  border-color: #f59e0b;
+}
+
+.ticket-cost {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+  border: 1px solid #e2e8f0;
+}
+
+.ticket-cost h3 {
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cost-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.insufficient-funds {
+  color: #b91c1c;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.purchase-message {
   padding: 1rem;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-.action-buttons {
+.purchase-message.info {
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.purchase-message.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+
+.purchase-message.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.ticket-actions {
   display: flex;
+  gap: 1rem;
   justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .approve-button,
 .buy-button {
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
   font-size: 1.1rem;
-  width: 100%;
-  max-width: 300px;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
 }
 
 .approve-button {
@@ -127,27 +225,66 @@
 .approve-button:hover:not(:disabled) {
   background-color: #0369a1;
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .buy-button {
-  background-color: #f59e0b;
+  background-color: #15803d;
   color: white;
-  animation: pulse 2s infinite;
 }
 
 .buy-button:hover:not(:disabled) {
-  background-color: #d97706;
+  background-color: #166534;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.insufficient-balance {
-  margin-top: 1rem;
+.approve-button:disabled,
+.buy-button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.faucet-reminder {
   text-align: center;
-  color: #b91c1c;
-  font-weight: 500;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.faucet-link {
+  color: #0284c7;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.faucet-link:hover {
+  color: #0369a1;
 }
 
 @media (max-width: 768px) {
-  .info-panel {
-    grid-template-columns: 1fr;
+  .buy-tickets-container {
+    padding: 1.5rem;
+  }
+
+  .ticket-purchase-form {
+    padding: 1.5rem;
+  }
+
+  .summary-item {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .ticket-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .approve-button,
+  .buy-button {
+    max-width: 100%;
   }
 }
