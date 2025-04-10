@@ -43,16 +43,16 @@ This creates a no-loss lottery system where participants can enjoy the excitemen
 
 ### 🛠️ Admin Dashboard
 
-**Admin Page - Lottery Overview**  
+**Admin Page - view-1**  
 ![Admin Page - Lottery Overview](./frontend/public/adminpage1.png)
 
-**Admin Page - Manage Tickets**  
+**Admin Page - view-2**  
 ![Admin Page - Manage Tickets](./frontend/public/adminpage2.png)
 
-**Admin Page - Winners List**  
+**Admin Page - view-3**  
 ![Admin Page - Winners List](./frontend/public/adminpage3.png)
 
-**Admin Page - Withdraw Funds**  
+**Admin Page - view-4**  
 ![Admin Page - Withdraw Funds](./frontend/public/adminpage4.png)
 
 ### 💰 Claim Fund Page
